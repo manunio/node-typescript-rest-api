@@ -1,0 +1,33 @@
+POST {{host}}/api/users
+Content-Type: application/json
+
+{
+  "email": "test@gmail.com",
+  "password": "Password456!",
+  "passwordConfirmation": "Password456!",
+  "name": "Manu Nair"
+}
+
+###
+POST {{host}}/api/sessions
+Content-Type: application/json
+
+{
+  "email": "test@gmail.com",
+  "password": "Password456!"
+}
+
+> {%
+client.global.set("accessToken", response.body.accessToken)
+ %}
+
+
+###
+GET {{host}}/api/sessions
+Accept: application/json
+Authorization: Bearer {{accessToken}}
+
+###
+DELETE {{host}}/api/sessions
+Accept: application/json
+Authorization: Bearer {{accessToken}}
